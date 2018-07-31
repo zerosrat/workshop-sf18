@@ -1,0 +1,25 @@
+<script src="../node_modules/vue/dist/vue.js"></script>
+
+<div id="app">
+  <big-button>I am big</big-button>
+  <red-button>I am red</red-button>
+  <base-button big color="red">I am big and red</base-button>
+</div>
+
+<script>
+Vue.component('base-button', {
+  // Implement this
+})
+
+Vue.component('big-button', {
+  // Implement this
+})
+
+Vue.component('red-button', {
+  // Implement this
+})
+
+const app = new Vue({
+  el: '#app'
+})
+</script>

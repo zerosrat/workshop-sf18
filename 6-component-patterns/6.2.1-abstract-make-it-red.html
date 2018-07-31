@@ -1,0 +1,20 @@
+<script src="../node_modules/vue/dist/vue.js"></script>
+
+<div id="app">
+  <make-it-red>
+    <h1>{{ foo }}</h1>
+  </make-it-red>
+</div>
+
+<script>
+Vue.component('make-it-red', {
+  // Implement this
+})
+
+new Vue({
+  el: '#app',
+  data: {
+    foo: 'bar'
+  }
+})
+</script>

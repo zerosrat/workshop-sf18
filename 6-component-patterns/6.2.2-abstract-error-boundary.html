@@ -1,0 +1,28 @@
+<script src="https://unpkg.com/vue@2.5.17-beta.0"></script>
+
+<div id="app">
+  <error-boundary>
+    <foo></foo>
+  </error-boundary>
+</div>
+
+<script>
+Vue.component('error-boundary', {
+  // Implement this
+})
+
+// Foo throws error
+Vue.component('foo', {
+  render (h) {
+    throw new Error('oops')
+    return h('div', 'hello from foo')
+  }
+})
+
+new Vue({
+  el: '#app',
+  data: {
+    throws: true
+  }
+})
+</script>

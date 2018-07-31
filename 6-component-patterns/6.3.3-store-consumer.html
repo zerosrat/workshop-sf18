@@ -5,7 +5,10 @@
 
 <script>
 Vue.component('store-consumer', {
-  // Implement this
+  functional: true,
+  render (h, { data, parent }) {
+    return data.scopedSlots.default(parent.$store)
+  }
 })
 
 const Component = {

@@ -18,7 +18,17 @@ new Vue({
     msg: 'This should be red'
   },
   render (h) {
-    // implement this
+    return h('div', { attrs: { id: 'app' }}, [
+      h('h1', {
+        attrs: { id: 'welcome' },
+        class: { red: this.isRed }
+      }, this.msg),
+      h('button', {
+        on: {
+          click: () => { this.isRed = !this.isRed }
+        }
+      }, 'toggle red')
+    ])
   }
 })
 </script>

@@ -8,15 +8,22 @@
 
 <script>
 Vue.component('base-button', {
-  // Implement this
+  props: {
+    big: Boolean,
+    color: String
+  },
+  template: `<button :style="{
+    fontSize: big ? '1.5em' : '1em',
+    color: color || 'inherit'
+  }"><slot/></button>`
 })
 
 Vue.component('big-button', {
-  // Implement this
+  template: `<base-button big><slot/></base-button>`
 })
 
 Vue.component('red-button', {
-  // Implement this
+  template: `<base-button color="red"><slot/></base-button>`
 })
 
 const app = new Vue({

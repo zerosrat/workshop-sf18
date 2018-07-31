@@ -13,6 +13,14 @@
 // and a button that increments all 3 counters at once
 new Vue({
   el: '#app',
-  // Implement this!
+  data: {
+    count: 0
+  },
+  components: {
+    counter: {
+      props: ['count'],
+      template: `<div>{{ count }}</div>`
+    }
+  }
 })
 </script>

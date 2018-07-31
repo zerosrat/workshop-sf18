@@ -4,9 +4,11 @@
 <div id="app"></div>
 
 <script>
-function connect () {
-  // Implement this
-}
+const connect = connector => Component => ({
+  render (h) {
+    return h(Component, { props: connector(this.$store) })
+  }
+})
 
 const Component = {
   props: ['foo', 'bar'],

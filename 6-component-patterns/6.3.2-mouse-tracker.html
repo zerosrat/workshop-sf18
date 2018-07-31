@@ -11,11 +11,36 @@
 </style>
 
 <div id="app">
+  <mouse-tracker>
+    <template slot-scope="{ x, y }">
+      <p>Mouse is at: {{ x }}, {{ y }}</p>
+    </template>
+  </mouse-tracker>
+
+  <mouse-tracker>
+    <template slot-scope="{ x, y }">
+      <div class="mouse" :style="{ left: `${x}px`, top: `${y}px` }"></div>
+    </template>
+  </mouse-tracker>
 </div>
 
 <script>
 Vue.component('mouse-tracker', {
-  // Implement this
+  data () {
+    return { x: 0, y: 0 }
+  },
+  mounted () {
+    window.addEventListener('mousemove', e => {
+      this.x = e.clientX
+      this.y = e.clientY
+    })
+  },
+  render () {
+    return this.$scopedSlots.default({
+      x: this.x,
+      y: this.y
+    })[0]
+  }
 })
 
 new Vue({

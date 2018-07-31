@@ -6,9 +6,6 @@ require('../../util').createTestCase(__filename, (window, logs, done) => {
   convert(obj)
 
   expect(obj.foo).toBe(123)
-
-  expect(logs.length > 0).toBe(true)
-
   expect(logs[0][0]).toMatch(`getting key "foo": 123`)
 
   obj.foo = 234

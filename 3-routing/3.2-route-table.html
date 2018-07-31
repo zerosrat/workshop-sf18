@@ -1,30 +1,50 @@
 <script src="../node_modules/vue/dist/vue.js"></script>
 
 <div id="app">
-  <!-- render main view here -->
+  <component :is="matchedComponent"></component>
   <a href="#foo">foo</a>
   <a href="#bar">bar</a>
 </div>
 
 <script>
-// '#/foo' -> Foo
-// '#/bar' -> Bar
-// '#/404' -> NotFound
-
 const Foo = { template: `<div>foo</div>` }
 const Bar = { template: `<div>bar</div>` }
 const NotFound = { template: `<div>not found!</div>` }
 
 const routeTable = {
-  // Implement this!
+  '#foo': Foo,
+  '#bar': Bar
 }
 
-window.addEventListener('hashchange', () => {
-  // Implement this!
-})
+// '#/foo' -> Foo
+// '#/bar' -> Bar
+// '#/404' -> NotFound
 
 const app = new Vue({
   el: '#app',
-  // Implement this!
+  data: {
+    // retrieving the initial URL
+    url: window.location.hash
+  },
+  mounted () {
+    // reacting to URL changes
+    window.addEventListener('hashchange', () => {
+      this.url = window.location.hash
+    })
+  },
+  // alternatively, this can be directly computed inside
+  // a render function.
+  computed: {
+    matchedComponent () {
+      return routeTable[this.url] || NotFound
+    }
+  },
+  // render (h) {
+  //   return h('div', [
+  //     h(routeTable['/' + this.url] || NotFound),
+  //     h('a', { attrs: { href: '#foo' }}, 'Go to Foo'),
+  //     h('a', { attrs: { href: '#bar' }}, 'Go to Bar')
+  //   ])
+  // }
 })
 </script>

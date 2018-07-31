@@ -8,7 +8,25 @@
 
 <script>
 Vue.component('error-boundary', {
-  // Implement this
+  data () {
+    return {
+      error: null
+    }
+  },
+  errorCaptured (err, vm, info) {
+    this.error = err.message
+    return false
+  },
+  render (h) {
+    if (this.error) {
+      return h(
+        'pre',
+        { style: { color: 'red' }},
+        `error from children: ${this.error}`
+      )
+    }
+    return this.$slots.default[0]
+  }
 })
 
 // Foo throws error

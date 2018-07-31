@@ -13,11 +13,37 @@
 </style>
 
 <div id="app">
+  <h2>Bold List</h2>
+  <hr>
+  <my-awesome-list>
+    <template slot-scope="{ item }">
+      <strong>{{ item.text }}</strong>
+    </template>
+  </my-awesome-list>
+
+  <h2>Red List</h2>
+  <hr>
+  <my-awesome-list>
+    <template slot-scope="{ item }">
+      <span class="red">{{ item.text }}</span>
+    </template>
+  </my-awesome-list>
 </div>
 
 <script>
 const MyAwesomeList = {
-  // Implement this
+  data: () => ({
+    list: [
+      { text: 'Hello' }
+    ]
+  }),
+  template: `
+    <ul class="list">
+      <li v-for="item in list">
+        <slot :item="item"/>
+      </li>
+    </ul>
+  `
 }
 
 new Vue({

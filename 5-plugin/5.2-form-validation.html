@@ -2,9 +2,9 @@
 
 <div id="app">
   <form @submit="validate">
-    <input v-model="text">
+    <input id="text" v-model="text">
     <br>
-    <input v-model="email">
+    <input id="email" v-model="email">
 
     <ul v-if="!$v.valid" style="color:red">
       <li v-for="error in $v.errors">

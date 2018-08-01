@@ -46,7 +46,7 @@ yarn test 1.1 --watch
 npm test -- 1.1 --watch
 ```
 
-### Solution Branche
+### Solution Branch
 
 This repo contains two branches: the `master` branch is where you will be working on the exercises, and the `solutions` branch contains the full solutions to each exercise.
 

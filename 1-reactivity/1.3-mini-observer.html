@@ -1,9 +1,52 @@
 <script>
-function observe (obj) {
-  // Implement this!
+class Dep {
+  constructor() {
+    this.subs = new Set()
+  }
+  depend() {
+    if (activeUpdate) {
+      this.subs.add(activeUpdate)
+    }
+  }
+  notify() {
+    this.subs.forEach(sub => sub())
+  }
 }
 
+function convert(obj) {
+  Object.keys(obj).forEach(prop => {
+    let value = obj[prop]
+    let dep = new Dep()
+    Object.defineProperty(obj, prop, {
+      get() {
+        // console.log(`getting key "${prop}": ${value}`)
+        dep.depend()
+        return value
+      },
+      set(newValue) {
+        // console.log(`${prop} is: ${newValue}`)
+        const changed = value !== newValue
+        value = newValue
+        // triggering re-computation
+        if (changed) {
+          dep.notify()
+        }
+      }
+    })
+  })
+}
+
+function observe (obj) {
+  convert(obj)
+}
+
+let activeUpdate
 function autorun (update) {
-  // Implement this!
+  const wrappedUpdate = () => {
+    activeUpdate = wrappedUpdate
+    update()
+    activeUpdate = null
+  }
+  wrappedUpdate()
 }
 </script>
